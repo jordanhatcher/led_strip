@@ -6,7 +6,7 @@ Contains the LEDConditions class
 
 import logging
 from pubsub import pub
-from ....condition import Condition
+from condition import Condition
 
 LOGGER = logging.getLogger(__name__)
 
@@ -36,8 +36,8 @@ class LEDConditions(Condition):
         Constructor
         """
 
-        Condition.__init__(self, scheduler, schedule=None)
-        pub.subscribe(self.evaluate, 'messages.pipe_node')
+        super().__init__(scheduler, schedule=None)
+        pub.subscribe(self.evaluate, 'messages.unix_socket_node')
         LOGGER.debug('Initialized')
 
     def evaluate(self, msg):
